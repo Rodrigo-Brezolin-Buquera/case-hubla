@@ -9,7 +9,9 @@ export const sendFile = async (file: FormData) => {
             baseURL, 
             file,
             { headers: { "Content-Type": "multipart/form-data" }});
+
         console.log(response.data);
+        
       } catch (error) {
         console.error(error);
       }
