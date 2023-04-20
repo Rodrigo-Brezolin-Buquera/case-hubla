@@ -1,7 +1,4 @@
 
-
-
-
 CREATE TABLE sellers (
     id TEXT UNIQUE NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,

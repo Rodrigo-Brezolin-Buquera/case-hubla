@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import { db } from "./data/knex";
+import Controller from "./controller";
 
 const app = express();
 
@@ -10,6 +10,10 @@ app.use(express.json());
 app.listen(3003, () => {
   console.log(`Servidor rodando na porta ${3003}`);
 });
+
+const controller = new Controller()
+
+
 
 app.get("/ping", async (req: Request, res: Response) => {
   try {
