@@ -1,3 +1,4 @@
+import { sendFile } from '@/api';
 import React, {useState} from 'react'
 
 const FileUpload = () => {
@@ -9,8 +10,15 @@ const FileUpload = () => {
   
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log(file);
+      console.log(file)
+
+      if (!file) return null;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      sendFile(formData)
     };
+
   return (
     <form onSubmit={handleSubmit}>
     <input type="file" onChange={handleChange} />

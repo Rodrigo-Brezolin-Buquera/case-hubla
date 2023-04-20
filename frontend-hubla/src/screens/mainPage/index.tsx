@@ -1,4 +1,4 @@
-import FileUpload from "./fileUpload";
+import FileUpload from "./FileUpload";
 
 const MainPage = () => {
  
