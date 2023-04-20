@@ -10,8 +10,9 @@ describe("FileUpload component Tests", () => {
     test("Upload Button", () => {
         render(<FileUpload />);
         const text = screen.getByText("Upload");
-        console.log(text)
         expect(text).toBeInTheDocument();
     });
+
+  
 })
 
