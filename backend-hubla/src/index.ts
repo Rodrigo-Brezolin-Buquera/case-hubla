@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import Controller from "./controller";
 import multer from 'multer';
+import Business from "./business";
+import Database from "./data";
 
 const app = express();
 
@@ -14,11 +16,12 @@ app.listen(3003, () => {
   console.log(`Servidor rodando na porta ${3003}`);
 });
 
-const controller = new Controller()
+const database = new Database()
+const business = new Business(database)
+const controller = new Controller(business)
 
 
+app.get("/seller/:id",  (req, res) =>  controller.findSeller(req, res));
+app.get("/transactions",  (req, res) =>  controller.findAllTransactions(req, res));
 
-app.get("/seller/:id", controller.findSeller);
-app.get("/transactions", controller.findAllTransactions);
-
-app.post("/transactions",upload.single('file'), controller.insertData);
+app.post("/transactions",upload.single('file'), (req, res) =>  controller.insertData(req, res));

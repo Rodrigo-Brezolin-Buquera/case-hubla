@@ -1,12 +1,14 @@
-import Database from "../data";
 import { CustomError } from "../error/customError";
 import fs from "fs";
 import { toModelSellers, toModelTransaction } from "./utils";
 import { Seller, Transaction } from "../types";
+import { Repository } from "./Repository";
 
-const database = new Database();
 
 class Business {
+  constructor(
+    private database: Repository
+   ) {}
   public async method() {
     try {
     } catch (error: any) {
@@ -27,7 +29,7 @@ class Business {
       const sellers: Seller[] = toModelSellers(transactions);
 
       for (let seller of sellers) {
-        await database.insertSeller(seller);
+        await this.database.insertSeller(seller);
 
         const sellerTransactions = transactions.filter(
           (i) => i.seller === seller.name
@@ -43,10 +45,10 @@ class Business {
 
         sellerTransactions.forEach(async (transaction) => {
           transaction.seller = seller.id;
-          await database.insertTransaction(transaction);
+          await this.database.insertTransaction(transaction);
         });
 
-        await database.updateBalance(seller.id, seller.balance);
+        await this.database.updateBalance(seller.id, seller.balance);
       }
       return transactions;
     } catch (error: any) {
@@ -59,7 +61,7 @@ class Business {
 
   public async findAllTransactions(): Promise<Transaction[]> {
     try {
-      return await database.findAllTransactions();
+      return await this.database.findAllTransactions();
     } catch (error: any) {
       throw new CustomError(
         error.sqlMessage || error.message,
@@ -70,7 +72,7 @@ class Business {
 
   public async findSeller(id: string): Promise<Seller> {
     try {
-      const seller = await database.findSeller(id);
+      const seller = await this.database.findSeller(id);
 
       if (!seller) {
         throw new CustomError("Sellers not found", 404);

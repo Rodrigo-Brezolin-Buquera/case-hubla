@@ -1,20 +1,11 @@
+import { Repository } from "../business/Repository";
 import { CustomError } from "../error/customError";
 import { Seller, Transaction } from "../types";
 import { BaseDatabase } from "./knex";
 
-class Database extends BaseDatabase {
+class Database extends BaseDatabase implements Repository {
   private static SELLERS_TABLE: string = "sellers";
   private static TRANSACTIONS_TABLE: string = "transactions";
-
-  public async method(): Promise<void> {
-    try {
-    } catch (error: any) {
-      throw new CustomError(
-        error.sqlMessage || error.message,
-        error.statusCode || 400
-      );
-    }
-  }
 
   public async insertSeller(input: Seller): Promise<void> {
     try {
