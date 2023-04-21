@@ -32,7 +32,16 @@ class Controller {
         }
     }
 
-
+    public async findSeller(req: Request, res: Response): Promise<void> {
+        try {
+            const id = req.params.id 
+            const result = await business.findSeller(id)
+            res.status(200).send({ data: result })
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+    
 }
 
 export default Controller

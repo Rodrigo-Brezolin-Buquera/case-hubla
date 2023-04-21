@@ -11,7 +11,8 @@ export type Seller = {
     id: string,
     name: string,
     type: SellerType,
-    balance: number
+    balance: number,
+    transactions?: Transaction[]
 }
 
 export enum SellerType {

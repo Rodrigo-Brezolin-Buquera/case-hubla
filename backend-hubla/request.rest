@@ -1,3 +1,3 @@
-GET http://localhost:3003/transactions
+GET http://localhost:3003/seller/4a5b606f-2aaf-40c7-9100-53e89b306634
 
 ###

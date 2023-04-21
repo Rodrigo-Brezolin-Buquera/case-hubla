@@ -35,7 +35,7 @@ class Business {
 
         seller.balance = sellerTransactions.reduce((acc, cur) => {
           if (cur.type == 3) {
-            return acc - Number(cur.value); 
+            return acc - Number(cur.value);
           } else {
             return acc + Number(cur.value);
           }
@@ -56,18 +56,33 @@ class Business {
       );
     }
   }
-  
-  
-  public async findAllTransactions(): Promise<Transaction[]>  {
+
+  public async findAllTransactions(): Promise<Transaction[]> {
     try {
-      return await database.findAllTransactions()
+      return await database.findAllTransactions();
     } catch (error: any) {
       throw new CustomError(
         error.sqlMessage || error.message,
         error.statusCode || 400
-        );
-      }
+      );
     }
-    
   }
+
+  public async findSeller(id: string): Promise<Seller> {
+    try {
+      const seller = await database.findSeller(id);
+
+      if (!seller) {
+        throw new CustomError("Sellers not found", 404);
+      }
+
+      return seller;
+    } catch (error: any) {
+      throw new CustomError(
+        error.sqlMessage || error.message,
+        error.statusCode || 400
+      );
+    }
+  }
+}
 export default Business;

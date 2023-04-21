@@ -18,6 +18,7 @@ const controller = new Controller()
 
 
 
+app.get("/seller/:id", controller.findSeller);
 app.get("/transactions", controller.findAllTransactions);
 
 app.post("/transactions",upload.single('file'), controller.insertData);
