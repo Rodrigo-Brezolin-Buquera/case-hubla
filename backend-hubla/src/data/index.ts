@@ -40,6 +40,14 @@ import { BaseDatabase } from "./knex";
         }
     }
 
+    public async findAllTransactions(): Promise<Transaction[]> {
+        try {
+           return await BaseDatabase.db(Database.TRANSACTIONS_TABLE)     
+        } catch (error:any) {
+            throw new CustomError(error.sqlMessage || error.message, error.statusCode || 400)
+        }
+    }
+
 
 
 

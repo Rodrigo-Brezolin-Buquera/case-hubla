@@ -18,12 +18,6 @@ const controller = new Controller()
 
 
 
-app.get("/ping", async (req: Request, res: Response) => {
-  try {
-    res.status(200).send({ message: "Pong!" });
-  } catch (error) {
-    res.send("Erro inesperado");
-  }
-});
+app.get("/transactions", controller.findAllTransactions);
 
-app.post("/insert",upload.single('file'), controller.insertData);
+app.post("/transactions",upload.single('file'), controller.insertData);

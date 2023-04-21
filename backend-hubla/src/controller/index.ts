@@ -7,8 +7,6 @@ class Controller {
 
     public async method(req: Request, res: Response): Promise<void> {
         try {
-          
-
             res.status(200).send({ data: "" })
         } catch (error:any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
@@ -25,7 +23,14 @@ class Controller {
         }
     }
 
-
+    public async findAllTransactions(req: Request, res: Response): Promise<void> {
+        try {
+            const result = await business.findAllTransactions()
+            res.status(200).send({ data: result })
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
 
 
 }

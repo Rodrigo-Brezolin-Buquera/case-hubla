@@ -34,8 +34,6 @@ class Business {
         );
 
         seller.balance = sellerTransactions.reduce((acc, cur) => {
-          // console.log("cur.type", cur.type); 
-          // console.log("cur.value", cur.value);
           if (cur.type == 3) {
             return acc - Number(cur.value); 
           } else {
@@ -58,6 +56,18 @@ class Business {
       );
     }
   }
-}
-
+  
+  
+  public async findAllTransactions(): Promise<Transaction[]>  {
+    try {
+      return await database.findAllTransactions()
+    } catch (error: any) {
+      throw new CustomError(
+        error.sqlMessage || error.message,
+        error.statusCode || 400
+        );
+      }
+    }
+    
+  }
 export default Business;
