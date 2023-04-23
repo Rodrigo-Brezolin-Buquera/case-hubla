@@ -22,6 +22,8 @@ export const toModelTransaction = (chunks: any): Transaction[] => {
         throw new CustomError("Incorrect file format", 406)
       }
     }
+    output.product.toLowerCase()
+    output.seller.toLowerCase()
     output.value = output.value.replace(/^0+/, "");
     output.id = generateId()
     return output;
@@ -64,7 +66,7 @@ export const toModelSellers = (transactions: Transaction[]): Seller[] => {
   return result;
 };
 
-export const normalizeData = async (file: Express.Multer.File): Promise<string[]> => {
+export const normalizeData = async (file: Express.Multer.File): Promise<any[]> => {
       let fileContent = await fs.promises.readFile(file.path, "utf8");
       if(!fileContent){
         throw new CustomError("Error reading the file", 400)
@@ -75,7 +77,7 @@ export const normalizeData = async (file: Express.Multer.File): Promise<string[]
         throw new CustomError("Error reading the file", 400)
       }
 
-      return chunks
+      return [chunks, fileContent]
 }
 
 export const deleteTempFile = (filePath: string) => {

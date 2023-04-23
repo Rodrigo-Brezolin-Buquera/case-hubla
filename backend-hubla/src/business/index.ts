@@ -17,7 +17,7 @@ class Business {
 
   public async insertData(file: Express.Multer.File): Promise<Transaction[]> {
     try {
-      const chunks = await normalizeData(file);
+      const [chunks, fileContent] = await normalizeData(file);
       const transactions: Transaction[] = toModelTransaction(chunks);
       const sellers: Seller[] = toModelSellers(transactions);
 
@@ -45,7 +45,7 @@ class Business {
 
         this.deleteTempFile(file.path);
       }
-      return transactions;
+      return fileContent;
     } catch (error: any) {
       throw new CustomError(
         error.sqlMessage || error.message,
