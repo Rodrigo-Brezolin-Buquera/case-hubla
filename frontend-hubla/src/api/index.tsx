@@ -31,3 +31,16 @@ export const findSellers = async (
     alert(error.message)
   }
 };
+
+export const findSellerById = async (
+  id: string,
+  setResponse: React.Dispatch<React.SetStateAction<Seller | undefined>>
+): Promise<void> => {
+  try {
+    const response = await axios.get(`${baseURL}/sellers/${id}`)
+
+    setResponse(response.data.result);
+  } catch (error:any) {
+    alert(error.message)
+  }
+};
