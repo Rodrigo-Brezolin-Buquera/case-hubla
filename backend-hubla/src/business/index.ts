@@ -10,10 +10,20 @@ class Business {
   public async insertData(file: Express.Multer.File): Promise<Transaction[]> {
     try {
       let fileContent = await fs.promises.readFile(file.path, "utf8");
+      if(!fileContent){
+        throw new CustomError("Error reading the file", 400)
+      }  
+      
       const chunkSize = 86;
       const chunks = fileContent.match(new RegExp(`.{1,${chunkSize}}`, "g"));
-      const transactions: Transaction[] = toModelTransaction(chunks);
+      if(!chunks){
+        throw new CustomError("Error reading the file", 400)
+      }
+      if(chunks[chunks.length -1].length !==chunkSize) {
+        throw new CustomError("Incorrect file format", 406)
+      }
 
+      const transactions: Transaction[] = toModelTransaction(chunks);
       const sellers: Seller[] = toModelSellers(transactions);
 
       for (let seller of sellers) {
@@ -71,6 +81,10 @@ class Business {
 
   public async findSeller(id: string): Promise<Seller> {
     try {
+      if(!id){
+        throw new CustomError("Please select an id", 400);
+      }
+
       const seller = await this.database.findSeller(id);
 
       if (!seller) {

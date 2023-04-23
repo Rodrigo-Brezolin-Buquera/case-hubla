@@ -10,7 +10,7 @@ class Controller {
         try {
             const file = req.file as Express.Multer.File
             const result = await this.business.insertData(file)
-            res.status(200).send({ data: result })
+            res.status(200).send({message: "Successful insertion", data: result })
         } catch (error:any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
