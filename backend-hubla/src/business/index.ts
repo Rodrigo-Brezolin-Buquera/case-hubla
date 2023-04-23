@@ -4,20 +4,8 @@ import { toModelSellers, toModelTransaction } from "./utils";
 import { Seller, Transaction } from "../types";
 import { Repository } from "./Repository";
 
-
 class Business {
-  constructor(
-    private database: Repository
-   ) {}
-  public async method() {
-    try {
-    } catch (error: any) {
-      throw new CustomError(
-        error.sqlMessage || error.message,
-        error.statusCode || 400
-      );
-    }
-  }
+  constructor(private database: Repository) {}
 
   public async insertData(file: Express.Multer.File): Promise<Transaction[]> {
     try {
@@ -62,6 +50,17 @@ class Business {
   public async findAllTransactions(): Promise<Transaction[]> {
     try {
       return await this.database.findAllTransactions();
+    } catch (error: any) {
+      throw new CustomError(
+        error.sqlMessage || error.message,
+        error.statusCode || 400
+      );
+    }
+  }
+
+  public async findAllSellers(): Promise<Seller[]> {
+    try {
+      return await this.database.findAllSellers();
     } catch (error: any) {
       throw new CustomError(
         error.sqlMessage || error.message,

@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import Controller from "./controller";
 import multer from 'multer';
@@ -20,8 +20,8 @@ const database = new Database()
 const business = new Business(database)
 const controller = new Controller(business)
 
-
-app.get("/seller/:id",  (req, res) =>  controller.findSeller(req, res));
+app.get("/sellers",  (req, res) =>  controller.findAllSellers(req, res));
+app.get("/sellers/:id",  (req, res) =>  controller.findSeller(req, res));
 app.get("/transactions",  (req, res) =>  controller.findAllTransactions(req, res));
 
 app.post("/transactions",upload.single('file'), (req, res) =>  controller.insertData(req, res));

@@ -35,6 +35,15 @@ class Controller {
         }
     }
 
+    public async findAllSellers(req: Request, res: Response): Promise<void> {
+        try {
+            const result = await this.business.findAllSellers()
+            res.status(200).send({ data: result })
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
 }
 
 export default Controller

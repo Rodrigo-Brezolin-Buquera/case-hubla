@@ -4,6 +4,7 @@ import { Seller, Transaction } from "../types";
 import { BaseDatabase } from "./knex";
 
 class Database extends BaseDatabase implements Repository {
+  
   private static SELLERS_TABLE: string = "sellers";
   private static TRANSACTIONS_TABLE: string = "transactions";
 
@@ -53,7 +54,14 @@ class Database extends BaseDatabase implements Repository {
     }
   }
 
-  public async findSeller(id: string): Promise<Seller> { //////////////// tirar esse any
+  public async findAllSellers(): Promise<Seller[]> {
+    const result = await BaseDatabase.db(Database.SELLERS_TABLE)
+    .where("type", "=", "CREATOR")
+    .orWhere("type", "=", "AFFILIATE")
+    return result
+  }
+
+  public async findSeller(id: string): Promise<Seller> { 
     try {
       const result = await BaseDatabase.db(Database.SELLERS_TABLE)
         .select(

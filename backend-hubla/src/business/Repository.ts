@@ -6,4 +6,6 @@ export interface Repository {
   updateBalance(id: string, balance: number): Promise<void>;
   findAllTransactions(): Promise<Transaction[]>;
   findSeller(id: string): Promise<Seller>;
+  findAllSellers(): Promise<Seller[]>;
+
 }
