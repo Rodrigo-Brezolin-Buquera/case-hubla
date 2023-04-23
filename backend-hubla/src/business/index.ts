@@ -13,7 +13,7 @@ class Business {
       if(!fileContent){
         throw new CustomError("Error reading the file", 400)
       }  
-      
+
       const chunkSize = 86;
       const chunks = fileContent.match(new RegExp(`.{1,${chunkSize}}`, "g"));
       if(!chunks){
@@ -47,6 +47,8 @@ class Business {
         });
 
         await this.database.updateBalance(seller.id, seller.balance);
+
+        fs.unlink(file.path, (err) => {});
       }
       return transactions;
     } catch (error: any) {
