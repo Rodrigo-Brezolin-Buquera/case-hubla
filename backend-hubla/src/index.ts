@@ -4,6 +4,7 @@ import Controller from "./controller";
 import multer from 'multer';
 import Business from "./business";
 import Database from "./data";
+import { deleteTempFile } from "./business/utils";
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.listen(3003, () => {
 });
 
 const database = new Database()
-const business = new Business(database)
+const business = new Business(database, deleteTempFile)
 const controller = new Controller(business)
 
 app.get("/sellers",  (req, res) =>  controller.findAllSellers(req, res));

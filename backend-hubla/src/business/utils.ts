@@ -1,5 +1,8 @@
+import { CustomError } from "../error/customError";
 import { generateId } from "../services/idGenerator";
 import { Seller, SellerType, Transaction } from "../types";
+import fs from "fs";
+
 
 export const toModelTransaction = (chunks: any): Transaction[] => {
   return chunks?.map((chunk: any) => {
@@ -15,6 +18,9 @@ export const toModelTransaction = (chunks: any): Transaction[] => {
       const { name, start, end } = field;
       const value = chunk.slice(start, end + 1).trim();
       output[name] = value;
+      if(output[name] === null || output[name] === undefined || output[name] === "" ) {
+        throw new CustomError("Incorrect file format", 406)
+      }
     }
     output.value = output.value.replace(/^0+/, "");
     output.id = generateId()
@@ -27,7 +33,6 @@ export const toModelSellers = (transactions: Transaction[]): Seller[] => {
     const sellerName = cur.seller;
     const sellerType = cur.type;
 
-
     if (!acc[sellerName]) {
       acc[sellerName] = { seller: sellerName, type: sellerType };
     } else if (!acc[sellerName].type.includes(sellerType)) {
@@ -37,12 +42,15 @@ export const toModelSellers = (transactions: Transaction[]): Seller[] => {
     return acc;
   }, {});
 
-  const result = Object.values(reducedTransactions).map((i: any) => {
+  const result: Seller[] = Object.values(reducedTransactions).map((i: any) => {
     if (i.type.includes("1")) {
       i.type = SellerType.CREATOR;
     } else if (i.type.includes("2")) {
       i.type = SellerType.AFFILIATE;
+    } else {
+      throw new CustomError("Invalid seller type", 400)
     }
+
     return {
       id: generateId(),
       name: i.seller,
@@ -50,5 +58,26 @@ export const toModelSellers = (transactions: Transaction[]): Seller[] => {
       balance: 0,
     };
   });
+
+ 
+
   return result;
 };
+
+export const normalizeData = async (file: Express.Multer.File): Promise<string[]> => {
+      let fileContent = await fs.promises.readFile(file.path, "utf8");
+      if(!fileContent){
+        throw new CustomError("Error reading the file", 400)
+      }  
+      const chunkSize = 86;
+      const chunks = fileContent.match(new RegExp(`.{1,${chunkSize}}`, "g"));
+      if(!chunks){
+        throw new CustomError("Error reading the file", 400)
+      }
+
+      return chunks
+}
+
+export const deleteTempFile = (filePath: string) => {
+  fs.unlink(filePath, (err) => {});
+} 

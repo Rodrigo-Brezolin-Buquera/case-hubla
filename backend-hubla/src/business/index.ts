@@ -1,28 +1,23 @@
 import { CustomError } from "../error/customError";
 import fs from "fs";
-import { toModelSellers, toModelTransaction } from "./utils";
+import {
+  deleteTempFile,
+  normalizeData,
+  toModelSellers,
+  toModelTransaction,
+} from "./utils";
 import { Seller, Transaction } from "../types";
 import { Repository } from "./Repository";
 
 class Business {
-  constructor(private database: Repository) {}
+  constructor(
+    private database: Repository,
+    private deleteTempFile: (filePath: string) => void
+  ) {}
 
   public async insertData(file: Express.Multer.File): Promise<Transaction[]> {
     try {
-      let fileContent = await fs.promises.readFile(file.path, "utf8");
-      if(!fileContent){
-        throw new CustomError("Error reading the file", 400)
-      }  
-
-      const chunkSize = 86;
-      const chunks = fileContent.match(new RegExp(`.{1,${chunkSize}}`, "g"));
-      if(!chunks){
-        throw new CustomError("Error reading the file", 400)
-      }
-      if(chunks[chunks.length -1].length !==chunkSize) {
-        throw new CustomError("Incorrect file format", 406)
-      }
-
+      const chunks = await normalizeData(file);
       const transactions: Transaction[] = toModelTransaction(chunks);
       const sellers: Seller[] = toModelSellers(transactions);
 
@@ -48,7 +43,7 @@ class Business {
 
         await this.database.updateBalance(seller.id, seller.balance);
 
-        fs.unlink(file.path, (err) => {});
+        this.deleteTempFile(file.path);
       }
       return transactions;
     } catch (error: any) {
@@ -83,7 +78,7 @@ class Business {
 
   public async findSeller(id: string): Promise<Seller> {
     try {
-      if(!id){
+      if (!id) {
         throw new CustomError("Please select an id", 400);
       }
 
