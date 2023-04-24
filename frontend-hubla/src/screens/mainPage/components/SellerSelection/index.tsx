@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 const SellerSelection = () => {
   const [sellers, setSellers] = useState<Seller[]>([]);
-  const [selleDetails, setSelleDetails] = useState<Seller | undefined>(
+  const [sellerDetails, setSellerDetails] = useState<Seller | undefined>(
     undefined
   );
 
@@ -13,11 +13,11 @@ const SellerSelection = () => {
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    findSellerById(event.target.value, setSelleDetails);
+    findSellerById(event.target.value, setSellerDetails);
   };
 
   const formatBalance = (value:number) => {
-    return "R$ " + (value/100).toString().replace('.', ',')
+    return value && "R$ " + (value/100).toString().replace('.', ',')
   }
 
   return (
@@ -39,11 +39,11 @@ const SellerSelection = () => {
       </select>
 
       <div>
-        {selleDetails && (
+        {sellerDetails && (
           <>
-            <p>{selleDetails.name}</p>
-            <p>{selleDetails.type}</p>
-            <p>{formatBalance(selleDetails.balance)}</p>
+            <p>{sellerDetails.name}</p>
+            <p>{sellerDetails.type}</p>
+            <p>{formatBalance(sellerDetails.balance)}</p>
           </>
         )}
       </div>

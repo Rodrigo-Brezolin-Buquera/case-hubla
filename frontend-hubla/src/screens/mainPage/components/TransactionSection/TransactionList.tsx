@@ -6,6 +6,7 @@ interface Props {
 }
 
 const TransactionList = ({list }: Props) => {
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const options = {

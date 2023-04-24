@@ -1,6 +1,5 @@
 import { sendFile } from "@/api";
 import { Transaction } from "@/api/types";
-import TransactionList from "@/screens/mainPage/components/TrasactionSection/TransactionList";
 import React, { useState } from "react";
 
 const FileUpload = () => {
@@ -16,22 +15,18 @@ const FileUpload = () => {
     if (!file) return null;
     const formData = new FormData();
     formData.append("file", file);
-    sendFile(formData, setResponse)
-    
+    sendFile(formData, setResponse);
   };
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <input type="file" id="input" onChange={handleChange} />
-      <button type="submit">Upload</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <input type="file" id="input" onChange={handleChange} />
+        <button type="submit">Upload</button>
+      </form>
 
-    {response &&
-    <div>  
-      {typeof(response) === "string" && <p>{response}</p> }
-    </div>
-    }
-
+      {response && (
+        <div>{typeof response === "string" && <p>{response}</p>}</div>
+      )}
     </>
   );
 };

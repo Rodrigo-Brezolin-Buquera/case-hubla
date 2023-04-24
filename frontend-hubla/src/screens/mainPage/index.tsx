@@ -1,6 +1,6 @@
 import FileUpload from "./components/FileUpload";
 import SellerSelection from "./components/SellerSelection";
-import TransactionSection from "./components/TrasactionSection";
+import TransactionSection from "./components/TransactionSection";
 
 const MainPage = () => {
 
