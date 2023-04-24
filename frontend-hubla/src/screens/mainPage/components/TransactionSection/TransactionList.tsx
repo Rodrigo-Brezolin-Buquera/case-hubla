@@ -1,12 +1,12 @@
 import { Transaction } from "@/api/types";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface Props {
-    list: Transaction[]
+  list: Transaction[];
 }
 
-const TransactionList = ({list }: Props) => {
-
+const TransactionList = ({ list }: Props) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const options = {
@@ -18,20 +18,20 @@ const TransactionList = ({list }: Props) => {
   };
 
   return (
-    <div>
+    <Box>
       {list.length &&
         list.map((i) => {
           return (
-            <p key={i.id}>
-              type:{i.type} 
-              Date: {formatDate(i.date)} 
-              Product: {i.product.toLowerCase()} 
-              Value: {i.value.toString().replace(/^0+/, "")}
-              Seller: {(i.seller).toLowerCase()}
-            </p>
+            <Box key={i.id} m={"0.1em"} display={"flex"} gap={"0.5em"} justifyContent={"flex-start"}>
+              <Text> Type:{i.type} </Text>
+              <Text> Date: {formatDate(i.date)} </Text>
+              <Text> Product: {i.product.toLowerCase()} </Text>
+              <Text> Value: {i.value.toString().replace(/^0+/, "")} </Text>
+              <Text> Seller: {i.seller.toLowerCase()} </Text>
+            </Box>
           );
         })}
-    </div>
+    </Box>
   );
 };
 

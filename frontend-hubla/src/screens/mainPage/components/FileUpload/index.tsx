@@ -1,5 +1,7 @@
 import { sendFile } from "@/api";
 import { Transaction } from "@/api/types";
+import TextContainer from "@/styles/TextContainer";
+import { Button, Box, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 const FileUpload = () => {
@@ -19,13 +21,16 @@ const FileUpload = () => {
   };
   return (
     <>
+    <TextContainer>
+
       <form onSubmit={handleSubmit}>
         <input type="file" id="input" onChange={handleChange} />
-        <button type="submit">Upload</button>
+        <Button backgroundColor={"green.100"} type="submit">Upload</Button>
       </form>
 
+    </TextContainer>
       {response && (
-        <div>{typeof response === "string" && <p>{response}</p>}</div>
+        <Box>{typeof response === "string" && <Text>{response}</Text>}</Box>
       )}
     </>
   );
