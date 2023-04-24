@@ -1,5 +1,6 @@
 import FileUpload from "./components/FileUpload";
 import SellerSelection from "./components/SellerSelection";
+import TransactionSection from "./components/TrasactionSection";
 
 const MainPage = () => {
 
@@ -7,6 +8,7 @@ const MainPage = () => {
     <>
       <main>
         <FileUpload/>
+        <TransactionSection/>
         <SellerSelection/>
       </main>
     </>

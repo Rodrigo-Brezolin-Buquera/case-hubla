@@ -13,8 +13,8 @@ export const sendFile = async (
     const response = await axios.post(`${baseURL}/transactions`, file, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    setResponse(response.data.message);
 
-    setResponse(response.data.result);
   } catch (error:any) {
     setResponse(error.message);
   }
@@ -38,6 +38,18 @@ export const findSellerById = async (
 ): Promise<void> => {
   try {
     const response = await axios.get(`${baseURL}/sellers/${id}`)
+
+    setResponse(response.data.result);
+  } catch (error:any) {
+    alert(error.message)
+  }
+};
+
+export const findTransactions = async (
+  setResponse: React.Dispatch<React.SetStateAction<Transaction[] >>
+): Promise<void> => {
+  try {
+    const response = await axios.get(`${baseURL}/transactions`)
 
     setResponse(response.data.result);
   } catch (error:any) {

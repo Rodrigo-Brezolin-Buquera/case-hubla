@@ -9,8 +9,8 @@ class Controller {
     public async insertData(req: Request, res: Response): Promise<void> {
         try {
             const file = req.file as Express.Multer.File
-            const result = await this.business.insertData(file)
-            res.status(200).send({message: "Successful insertion", result })
+            await this.business.insertData(file)
+            res.status(200).send({message: "Successful insertion" })
         } catch (error:any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }

@@ -1,6 +1,6 @@
 import { sendFile } from "@/api";
 import { Transaction } from "@/api/types";
-import TransactionList from "@/screens/mainPage/components/TransactionList";
+import TransactionList from "@/screens/mainPage/components/TrasactionSection/TransactionList";
 import React, { useState } from "react";
 
 const FileUpload = () => {
@@ -27,12 +27,8 @@ const FileUpload = () => {
     </form>
 
     {response &&
-    <div>
-      <p>Dados enviadas:</p>
-      
+    <div>  
       {typeof(response) === "string" && <p>{response}</p> }
-      {Array.isArray(response) && <TransactionList list={response} />} 
-
     </div>
     }
 

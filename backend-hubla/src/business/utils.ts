@@ -77,7 +77,7 @@ export const normalizeData = async (file: Express.Multer.File): Promise<any[]> =
         throw new CustomError("Error reading the file", 400)
       }
 
-      return [chunks, fileContent]
+      return chunks
 }
 
 export const deleteTempFile = (filePath: string) => {
