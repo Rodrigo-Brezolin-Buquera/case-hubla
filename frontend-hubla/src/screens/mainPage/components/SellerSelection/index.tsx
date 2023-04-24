@@ -1,7 +1,7 @@
 import { findSellerById, findSellers } from "@/api";
 import { Seller } from "@/api/types";
 import TextContainer from "@/styles/TextContainer";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 const SellerSelection = () => {
@@ -26,10 +26,8 @@ const SellerSelection = () => {
     <TextContainer>
       {sellers?.length > 0 && (
         <>
-
-          <Box display={"flex"} justifyContent={"center"} gap={"1em"}>
-            <Text fontSize={"xl"}>Select a seller</Text>
-             <select placeholder="Sellers" onChange={handleChange}>
+          <Text> Select a seller to see the balance </Text>
+          <select placeholder="Sellers" onChange={handleChange}>
             <option key={0} value={""}>
               Sellers
             </option>
@@ -43,16 +41,15 @@ const SellerSelection = () => {
                 );
               })}
           </select>
-          </Box>
-          
+
           <Box
             display={"flex"}
-            flexDirection={"column"}   
-            gap={"0.5em"}    
+            flexDirection={"column"}
+            gap={"0.5em"}
             justifyContent={"flex-start"}
             width={"100%"}
             paddingLeft={"160px"}
-            >
+          >
             {sellerDetails && (
               <>
                 <Text>Type: {sellerDetails.type}</Text>

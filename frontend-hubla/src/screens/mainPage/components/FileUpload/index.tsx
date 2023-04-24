@@ -21,7 +21,7 @@ const FileUpload = () => {
   };
   return (
     <>
-    <TextContainer>
+    <TextContainer >
 
       <form onSubmit={handleSubmit}>
         <input type="file" id="input" onChange={handleChange} />
