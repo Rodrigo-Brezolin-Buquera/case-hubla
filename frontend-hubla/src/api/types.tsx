@@ -14,3 +14,8 @@ export type Seller = {
     balance: number,
     transactions?: Transaction[]
 }
+
+export type TLoginForm = {
+    email: string,
+    password: string
+}

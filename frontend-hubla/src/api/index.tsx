@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Seller, Transaction } from "./types";
+import { Seller, TLoginForm, Transaction } from "./types";
 
 const baseURL: string = "http://localhost:3003";
 
@@ -51,6 +51,15 @@ export const findTransactions = async (
     const response = await axios.get(`${baseURL}/transactions`)
 
     setResponse(response.data.result);
+  } catch (error:any) {
+    alert(error.message)
+  }
+};
+
+export const login = async (form: TLoginForm): Promise<void> => {
+  try {
+    const res =  await axios.post(`${baseURL}/login`, form)
+    localStorage.setItem("token", res.data.token)
   } catch (error:any) {
     alert(error.message)
   }
