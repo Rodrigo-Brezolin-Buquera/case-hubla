@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import Business from "../business"
-import Database from "../data"
 import { IUserLoginDTO } from "../types"
 
 class Controller {

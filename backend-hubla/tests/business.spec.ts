@@ -2,9 +2,11 @@ import Business from "../src/business";
 import { DatabaseMock } from "./mocks/databaseMock";
 import { SellerType } from "../src/types";
 import { deleteTempFileMock } from "./mocks/utilsMock";
+import { HashManager } from "../src/services/HashManager";
+import { Authenticator } from "../src/services/Authenticator";
 
 const databaseMock = new DatabaseMock();
-const business = new Business(databaseMock, deleteTempFileMock);
+const business = new Business(databaseMock, deleteTempFileMock, new HashManager(), new Authenticator());
 
 describe("Business Tests - insertData method", () => {
   const file = {

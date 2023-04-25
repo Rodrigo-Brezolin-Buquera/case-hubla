@@ -1,7 +1,8 @@
 import { Repository } from "../../src/business/Repository";
-import { Seller, SellerType, Transaction } from "../../src/types";
+import { Seller, SellerType, Transaction, User } from "../../src/types";
 
 export class DatabaseMock implements Repository {
+   
     public insertSeller = jest.fn(async (input: Seller): Promise<void> => {});
     public insertTransaction = jest.fn(async (input: Transaction): Promise<void> => {})
     public updateBalance = jest.fn( async (id: string, balance: number): Promise<void> => {} );
@@ -54,4 +55,7 @@ export class DatabaseMock implements Repository {
         },
       ];
     });
+     public findUserByEmail  = jest.fn(async (email: string): Promise<User> => {
+       return {id: "id", email:"email@email.com.br", password:"123456", role: "Admin"}
+    })
   }
