@@ -1,14 +1,19 @@
-import { Transaction } from "@/api/types";
+import { findSellers } from "@/api";
+import { Seller, Transaction } from "@/api/types";
 import { Box, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FileUpload from "./components/FileUpload";
 import SellerSelection from "./components/SellerSelection";
 import TransactionSection from "./components/TransactionSection";
 
 const MainPage = () => {
   const [response, setResponse] = useState<Transaction[] | string>();
+  const [sellers, setSellers] = useState<Seller[]>([]);
 
-     
+  useEffect(()=>{
+    findSellers(setSellers);
+
+  },[response])
   return (
     <Box
       display={"flex"}
@@ -32,7 +37,7 @@ const MainPage = () => {
       </Box>
 
       <FileUpload response={response} setResponse={setResponse} />
-      <SellerSelection response={response}/>
+      <SellerSelection sellers={sellers} />
       <TransactionSection />
     </Box>
   );

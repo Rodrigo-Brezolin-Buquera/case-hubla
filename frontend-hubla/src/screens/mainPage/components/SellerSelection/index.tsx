@@ -1,23 +1,20 @@
 import { findSellerById, findSellers } from "@/api";
-import { Seller, Transaction } from "@/api/types";
+import { Seller } from "@/api/types";
 import TextContainer from "@/styles/TextContainer";
 import { Box, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
+
 interface Props {
-  response: Transaction[] | string | undefined
+  sellers: Seller[]
 }
 
-const SellerSelection = ({response}: Props) => {
-  const [sellers, setSellers] = useState<Seller[]>([]);
+const SellerSelection = ({sellers}:Props) => {
   const [sellerDetails, setSellerDetails] = useState<Seller | undefined>(
     undefined
   );
 
-  useEffect(() => {
-    findSellers(setSellers);
-  }, [response]);
-
+ 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     findSellerById(event.target.value, setSellerDetails);
   };

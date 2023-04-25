@@ -22,8 +22,8 @@ export const toModelTransaction = (chunks: any): Transaction[] => {
         throw new CustomError("Incorrect file format", 406)
       }
     }
-    output.product.toLowerCase()
-    output.seller.toLowerCase()
+    output.product = output.product.toLowerCase()
+    output.seller = output.seller.toLowerCase()
     output.value = output.value.replace(/^0+/, "");
     output.id = generateId()
     return output;

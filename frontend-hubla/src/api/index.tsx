@@ -25,7 +25,6 @@ export const findSellers = async (
 ): Promise<void> => {
   try {
     const response = await axios.get(`${baseURL}/sellers`)
-
     setResponse(response.data.result);
   } catch (error:any) {
     alert(error.message)

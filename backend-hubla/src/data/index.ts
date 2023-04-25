@@ -1,6 +1,6 @@
 import { Repository } from "../business/Repository";
 import { CustomError } from "../error/customError";
-import { Seller, Transaction } from "../types";
+import { Seller, SellerType, Transaction } from "../types";
 import { BaseDatabase } from "./knex";
 
 class Database extends BaseDatabase implements Repository {
@@ -56,8 +56,8 @@ class Database extends BaseDatabase implements Repository {
 
   public async findAllSellers(): Promise<Seller[]> {
     const result = await BaseDatabase.db(Database.SELLERS_TABLE)
-    .where("type", "=", "CREATOR")
-    .orWhere("type", "=", "AFFILIATE")
+    .where("type", "=", SellerType.CREATOR)
+    .orWhere("type", "=", SellerType.AFFILIATE)
     return result
   }
 

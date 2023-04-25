@@ -16,7 +16,7 @@ export type Seller = {
 }
 
 export enum SellerType {
-    CREATOR = "CREATOR",
-    AFFILIATE = "AFFILIATE"
+    CREATOR = "Creator",
+    AFFILIATE = "Affiliate"
 
 }
