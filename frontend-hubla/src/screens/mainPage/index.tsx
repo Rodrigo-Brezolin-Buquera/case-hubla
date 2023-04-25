@@ -1,9 +1,14 @@
+import { Transaction } from "@/api/types";
 import { Box, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import FileUpload from "./components/FileUpload";
 import SellerSelection from "./components/SellerSelection";
 import TransactionSection from "./components/TransactionSection";
 
 const MainPage = () => {
+  const [response, setResponse] = useState<Transaction[] | string>();
+
+     
   return (
     <Box
       display={"flex"}
@@ -26,8 +31,8 @@ const MainPage = () => {
        <Text fontSize={"xl"}>FullStack Chalange - Hubla! - Develop by Rodrigo Brezolin Buquera</Text> 
       </Box>
 
-      <FileUpload />
-      <SellerSelection />
+      <FileUpload response={response} setResponse={setResponse} />
+      <SellerSelection response={response}/>
       <TransactionSection />
     </Box>
   );

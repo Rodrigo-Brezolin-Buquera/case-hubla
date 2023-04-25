@@ -4,9 +4,13 @@ import TextContainer from "@/styles/TextContainer";
 import { Button, Box, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-const FileUpload = () => {
+interface Props {
+  response: Transaction[] | string | undefined,
+  setResponse: React.Dispatch<React.SetStateAction<string | Transaction[] | undefined>>
+}
+
+const FileUpload = ({response, setResponse}: Props) => {
   const [file, setFile] = useState<File | null>(null);
-  const [response, setResponse] = useState<Transaction[] | string>();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.files && setFile(event.target.files[0]);

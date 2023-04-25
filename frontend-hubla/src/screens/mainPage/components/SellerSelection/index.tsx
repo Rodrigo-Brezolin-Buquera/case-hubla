@@ -1,10 +1,14 @@
 import { findSellerById, findSellers } from "@/api";
-import { Seller } from "@/api/types";
+import { Seller, Transaction } from "@/api/types";
 import TextContainer from "@/styles/TextContainer";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-const SellerSelection = () => {
+interface Props {
+  response: Transaction[] | string | undefined
+}
+
+const SellerSelection = ({response}: Props) => {
   const [sellers, setSellers] = useState<Seller[]>([]);
   const [sellerDetails, setSellerDetails] = useState<Seller | undefined>(
     undefined
@@ -12,7 +16,7 @@ const SellerSelection = () => {
 
   useEffect(() => {
     findSellers(setSellers);
-  }, []);
+  }, [response]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     findSellerById(event.target.value, setSellerDetails);
@@ -23,9 +27,9 @@ const SellerSelection = () => {
   };
 
   return (
-    <TextContainer>
-      {sellers?.length > 0 && (
-        <>
+    <>
+      {sellers.length ? (
+        <TextContainer>
           <Text> Select a seller to see the balance </Text>
           <select placeholder="Sellers" onChange={handleChange}>
             <option key={0} value={""}>
@@ -57,9 +61,9 @@ const SellerSelection = () => {
               </>
             )}
           </Box>
-        </>
-      )}
-    </TextContainer>
+        </TextContainer>
+      ) : null}
+    </>
   );
 };
 

@@ -19,7 +19,7 @@ const TransactionList = ({ list }: Props) => {
 
   return (
     <Box>
-      {list.length &&
+      {list.length ? 
         list.map((i) => {
           return (
             <Box key={i.id} m={"0.1em"} display={"flex"} gap={"0.5em"} justifyContent={"flex-start"}>
@@ -30,7 +30,10 @@ const TransactionList = ({ list }: Props) => {
               <Text> Seller: {i.seller.toLowerCase()} </Text>
             </Box>
           );
-        })}
+        })
+        :
+      <Text>No transactions at the moment</Text>  
+      }
     </Box>
   );
 };
