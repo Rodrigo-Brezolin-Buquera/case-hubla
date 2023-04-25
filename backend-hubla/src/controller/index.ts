@@ -54,7 +54,7 @@ class Controller {
             }
             const token: string = await this.business.login(input)
 
-            res.status(201).send({ data: token })
+            res.status(201).send({ token: token })
         } catch (error:any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
