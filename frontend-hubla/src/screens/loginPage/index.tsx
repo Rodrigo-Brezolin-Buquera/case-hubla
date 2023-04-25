@@ -4,8 +4,6 @@ import {
   Box,
   Button,
   CircularProgress,
-  FormControl,
-  Heading,
   Input,
   Text,
 } from "@chakra-ui/react";

@@ -1,10 +1,10 @@
 import { findSellers } from "@/api";
 import { Seller, Transaction } from "@/api/types";
 import { useProtectedPage } from "@/hooks/useProtectedPage";
-import { Box, Button, Text } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import FileUpload from "./components/FileUpload";
+import Header from "./components/Header";
 import SellerSelection from "./components/SellerSelection";
 import TransactionSection from "./components/TransactionSection";
 
@@ -12,17 +12,12 @@ const MainPage = () => {
   useProtectedPage()
   const [response, setResponse] = useState<Transaction[] | string>();
   const [sellers, setSellers] = useState<Seller[]>([]);
-  const router = useRouter()
+
   useEffect(()=>{
     findSellers(setSellers);
   },[response])
 
-  const logout = async () =>{
-    localStorage.removeItem("token")
-    await router.push("/")
-  }
-
-  return (
+   return (
     <Box
       display={"flex"}
       flexDirection={"column"}
@@ -33,26 +28,7 @@ const MainPage = () => {
       minH={"100vh"}
       gap={"1em"}
     >
-      <Box
-        backgroundColor={"green.200"}
-        w={"100%"}
-        h={"70px"}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        position={"relative"}
-      >
-       <Text fontSize={"xl"}>FullStack Challenge - Hubla! - Develop by Rodrigo Brezolin Buquera</Text> 
-        <Button 
-         backgroundColor={"green.100"  } 
-        position={"absolute"}
-         right={1} 
-         onClick={logout}
-        >
-          Logout
-        </Button>
-      </Box>
-
+      <Header/>
       <FileUpload response={response} setResponse={setResponse} />
       <SellerSelection sellers={sellers} />
       <TransactionSection />
