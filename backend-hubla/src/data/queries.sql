@@ -19,5 +19,10 @@ CREATE TABLE transactions (
 SELECT * FROM sellers;
 SELECT * FROM transactions;
 
+CREATE TABLE users (
+    id TEXT UNIQUE NOT NULL PRIMARY KEY,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL
+);
 
-DROP TABLE transactions;

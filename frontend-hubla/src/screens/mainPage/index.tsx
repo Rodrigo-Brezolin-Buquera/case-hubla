@@ -33,7 +33,7 @@ const MainPage = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-       <Text fontSize={"xl"}>FullStack Chalange - Hubla! - Develop by Rodrigo Brezolin Buquera</Text> 
+       <Text fontSize={"xl"}>FullStack Challenge - Hubla! - Develop by Rodrigo Brezolin Buquera</Text> 
       </Box>
 
       <FileUpload response={response} setResponse={setResponse} />

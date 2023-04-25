@@ -1,5 +1,7 @@
 import { Request, Response } from "express"
 import Business from "../business"
+import Database from "../data"
+import { IUserLoginDTO } from "../types"
 
 class Controller {
     constructor(
@@ -10,7 +12,7 @@ class Controller {
         try {
             const file = req.file as Express.Multer.File
             await this.business.insertData(file)
-            res.status(200).send({message: "Successful insertion" })
+            res.status(201).send({message: "Successful insertion" })
         } catch (error:any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
@@ -44,6 +46,19 @@ class Controller {
         }
     }
 
+    public async login(req: Request, res: Response): Promise<void> {
+        try {
+            const input: IUserLoginDTO = {
+                email: req.body.email,
+                password: req.body.password
+            }
+            const token: string = await this.business.login(input)
+
+            res.status(201).send({ data: token })
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
 }
 
 export default Controller

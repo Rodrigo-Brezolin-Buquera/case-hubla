@@ -5,6 +5,8 @@ import multer from 'multer';
 import Business from "./business";
 import Database from "./data";
 import { deleteTempFile } from "./business/utils";
+import { HashManager } from "./services/HashManager";
+import { Authenticator } from "./services/Authenticator";
 
 const app = express();
 
@@ -18,7 +20,7 @@ app.listen(3003, () => {
 });
 
 const database = new Database()
-const business = new Business(database, deleteTempFile)
+const business = new Business(database, deleteTempFile, new HashManager(), new Authenticator() )
 const controller = new Controller(business)
 
 app.get("/sellers",  (req, res) =>  controller.findAllSellers(req, res));
@@ -26,3 +28,5 @@ app.get("/sellers/:id",  (req, res) =>  controller.findSeller(req, res));
 app.get("/transactions",  (req, res) =>  controller.findAllTransactions(req, res));
 
 app.post("/transactions",upload.single('file'), (req, res) =>  controller.insertData(req, res));
+app.post("/login", (req, res) =>  controller.login(req, res));
+

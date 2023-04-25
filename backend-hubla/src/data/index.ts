@@ -1,12 +1,14 @@
 import { Repository } from "../business/Repository";
 import { CustomError } from "../error/customError";
-import { Seller, SellerType, Transaction } from "../types";
+import { Seller, SellerType, Transaction, User } from "../types";
 import { BaseDatabase } from "./knex";
 
 class Database extends BaseDatabase implements Repository {
   
   private static SELLERS_TABLE: string = "sellers";
   private static TRANSACTIONS_TABLE: string = "transactions";
+  private static USERS_TABLE: string = "users";
+
 
   public async insertSeller(input: Seller): Promise<void> {
     try {
@@ -108,6 +110,17 @@ class Database extends BaseDatabase implements Repository {
         })
     }
   }
+
+  public async findUserByEmail(email: string): Promise<User> {
+    try {
+        const result = await BaseDatabase.db(Database.USERS_TABLE)
+            .select("*")
+            .where({ email })   
+        return result[0]
+    } catch (error:any) {
+        throw new CustomError(error.sqlMessage || error.message, error.statusCode || 400)
+    }
+}
 
 }
 

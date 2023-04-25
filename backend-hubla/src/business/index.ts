@@ -1,18 +1,21 @@
 import { CustomError } from "../error/customError";
-import fs from "fs";
 import {
-  deleteTempFile,
   normalizeData,
   toModelSellers,
   toModelTransaction,
 } from "./utils";
-import { Seller, Transaction } from "../types";
+import { IUserLoginDTO, Seller, Transaction, User } from "../types";
 import { Repository } from "./Repository";
+import { AuthenticationData, Authenticator } from "../services/Authenticator";
+import { HashManager } from "../services/HashManager";
+import { generateId } from "../services/idGenerator";
 
 class Business {
   constructor(
     private database: Repository,
-    private deleteTempFile: (filePath: string) => void
+    private deleteTempFile: (filePath: string) => void,
+    private hashManager: HashManager,
+    private authenticator: Authenticator
   ) {}
 
   public async insertData(file: Express.Multer.File): Promise<void> {
@@ -95,5 +98,24 @@ class Business {
       );
     }
   }
+
+  public async login({ email, password }: IUserLoginDTO): Promise<string> {
+    try {
+        const user: User = await this.database.findUserByEmail(email)
+        const comparePassword = await this.hashManager.verifyHash(password, user.password)
+
+        if(!comparePassword) {
+          throw new CustomError("Invalid password, try again", 406)
+        }
+
+        const payload: AuthenticationData = { id: user.id, role: user.role }
+        const token: string = this.authenticator.generateToken(payload) 
+        return token
+    } catch (error:any) {
+        throw new CustomError(error.sqlMessage || error.message, error.statusCode || 400)
+    }
+}
+
+
 }
 export default Business;

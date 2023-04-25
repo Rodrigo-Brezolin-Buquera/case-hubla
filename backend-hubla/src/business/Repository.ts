@@ -1,4 +1,4 @@
-import { Seller, Transaction } from "../types";
+import { Seller, Transaction, User } from "../types";
 
 export interface Repository {
   insertSeller(input: Seller): Promise<void>;
@@ -7,5 +7,5 @@ export interface Repository {
   findAllTransactions(): Promise<Transaction[]>;
   findSeller(id: string): Promise<Seller>;
   findAllSellers(): Promise<Seller[]>;
-
+  findUserByEmail(email: string): Promise<User>;
 }
