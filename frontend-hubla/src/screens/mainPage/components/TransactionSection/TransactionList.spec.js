@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import TransactionList from "./TransactionList"
 
 
-describe.skip("TransactionList component Tests", () => {
+describe("TransactionList component Tests", () => {
 
     const mockList = [{
         date: "2022-01-15T19:20:30-03:00",

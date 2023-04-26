@@ -13,7 +13,7 @@ useRouter.mockReturnValue({
     push: pushMock,
 })
 
-describe.skip("FileUpload component Tests", () => {
+describe("FileUpload component Tests", () => {
     afterEach(() => {
         cleanup();
       });

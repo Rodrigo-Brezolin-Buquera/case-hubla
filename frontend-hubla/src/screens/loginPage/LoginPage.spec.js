@@ -13,7 +13,7 @@ useRouter.mockReturnValue({
     push: pushMock,
 })
 
-describe.skip("LoginPage component Tests", () => {
+describe("LoginPage component Tests", () => {
 
     test("Render", () => {
         render(<LoginPage />);
