@@ -15,7 +15,7 @@ const TextContainer = ({ children }: Props) => {
       p={"0.5em"}
       gap={"0.5em"}
       fontSize={"lg"}
-      w={"500px"}
+      w={["360px","400px","500px"]}
     >
       {children}
     </Card>

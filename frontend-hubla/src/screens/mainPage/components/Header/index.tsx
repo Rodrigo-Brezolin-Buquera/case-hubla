@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { text } from "stream/consumers";
 
 const Header = () => {
   const router = useRouter();
@@ -16,11 +17,11 @@ const Header = () => {
       w={"100%"}
       h={"70px"}
       display={"flex"}
-      justifyContent={"center"}
+      justifyContent={["start", "center"]}
       alignItems={"center"}
       position={"relative"}
     >
-      <Text fontSize={"xl"}>
+      <Text fontSize={["sm","xl"]} maxW={["300px", "auto" ]  }>
         FullStack Challenge - Hubla! - Develop by Rodrigo Brezolin Buquera
       </Text>
       <Button

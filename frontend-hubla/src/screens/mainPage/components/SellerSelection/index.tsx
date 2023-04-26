@@ -48,8 +48,8 @@ const SellerSelection = ({sellers}:Props) => {
             flexDirection={"column"}
             gap={"0.5em"}
             justifyContent={"flex-start"}
+            alignItems={"center"}
             width={"100%"}
-            paddingLeft={"160px"}
           >
             {sellerDetails && (
               <>

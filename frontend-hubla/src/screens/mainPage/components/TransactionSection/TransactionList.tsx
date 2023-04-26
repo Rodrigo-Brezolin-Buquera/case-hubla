@@ -19,10 +19,18 @@ const TransactionList = ({ list }: Props) => {
 
   return (
     <Box>
-      {list.length ? 
+      {list.length ? (
         list.map((i) => {
           return (
-            <Box key={i.id} m={"0.1em"} display={"flex"} gap={"0.5em"} justifyContent={"flex-start"}>
+            <Box
+              key={i.id}
+              m={"0.1em"}
+              marginBottom={"1em"}
+              display={"flex"}
+              flexDirection={["column", "row"]}
+              gap={"0.5em"}
+              justifyContent={"flex-start"}
+            >
               <Text> Type:{i.type} </Text>
               <Text> Date: {formatDate(i.date)} </Text>
               <Text> Product: {i.product.toLowerCase()} </Text>
@@ -31,9 +39,9 @@ const TransactionList = ({ list }: Props) => {
             </Box>
           );
         })
-        :
-      <Text>No transactions at the moment</Text>  
-      }
+      ) : (
+        <Text>No transactions at the moment</Text>
+      )}
     </Box>
   );
 };
