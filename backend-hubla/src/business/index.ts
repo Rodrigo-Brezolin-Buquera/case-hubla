@@ -6,16 +6,15 @@ import {
 } from "./utils";
 import { IUserLoginDTO, Seller, Transaction, User } from "../types";
 import { Repository } from "./Repository";
-import { AuthenticationData, Authenticator } from "../services/Authenticator";
-import { HashManager } from "../services/HashManager";
-import { generateId } from "../services/idGenerator";
+import { AuthenticationData } from "../services/Authenticator";
+import { IAuthenticator, IHashManager } from "./adapters";
 
 class Business {
   constructor(
     private database: Repository,
     private deleteTempFile: (filePath: string) => void,
-    private hashManager: HashManager,
-    private authenticator: Authenticator
+    private hashManager: IHashManager,
+    private authenticator: IAuthenticator
   ) {}
 
   public async insertData(file: Express.Multer.File): Promise<void> {

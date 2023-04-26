@@ -1,6 +1,7 @@
 import * as bcrypt from "bcryptjs";
+import { IHashManager } from "../business/adapters";
 
-export class HashManager {
+export class HashManager  implements IHashManager{
     async generateHash(s:string):Promise<string> {
         const salt = await bcrypt.genSalt(12)
         const result = await bcrypt.hash(s, salt)

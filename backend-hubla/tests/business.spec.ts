@@ -1,40 +1,50 @@
 import Business from "../src/business";
 import { DatabaseMock } from "./mocks/databaseMock";
 import { SellerType } from "../src/types";
-import { deleteTempFileMock } from "./mocks/utilsMock";
-import { HashManager } from "../src/services/HashManager";
-import { Authenticator } from "../src/services/Authenticator";
+import {
+  AuthenticatorMock,
+  deleteTempFileMock,
+  HashManagerMock,
+} from "./mocks/mocks";
+
+const hashManager = new HashManagerMock();
+const authenticator = new AuthenticatorMock();
 
 const databaseMock = new DatabaseMock();
-const business = new Business(databaseMock, deleteTempFileMock, new HashManager(), new Authenticator());
+const business = new Business(
+  databaseMock,
+  deleteTempFileMock,
+  hashManager,
+  authenticator
+);
 
 describe("Business Tests - insertData method", () => {
   const file = {
-    path: './tests/mocks/sales.txt'
-  } ;
+    path: "./tests/mocks/sales.txt",
+  };
 
   test("Sucess case: database insertSeller calls ", async () => {
-    await business.insertData(file as any)
-    expect(databaseMock.insertSeller).toBeCalledTimes(7)
+    await business.insertData(file as any);
+    expect(databaseMock.insertSeller).toBeCalledTimes(7);
   });
 
   test("Sucess case: database insertTransaction calls ", async () => {
-    await business.insertData(file as any)
-    expect(databaseMock.insertTransaction).toBeCalledTimes(20)
+    await business.insertData(file as any);
+    expect(databaseMock.insertTransaction).toBeCalledTimes(20);
   });
 
   test("Sucess case: database updateBalance calls ", async () => {
-    await business.insertData(file as any)
-    expect(databaseMock.updateBalance).toBeCalledTimes(7)
+    await business.insertData(file as any);
+    expect(databaseMock.updateBalance).toBeCalledTimes(7);
   });
- 
+
   test("Error: empty file ", async () => {
     const emptyfile = {
-      path: './tests/mocks/empty.txt'
-    } ;
+      path: "./tests/mocks/empty.txt",
+    };
     try {
-      await business.insertData(emptyfile as any)
-    } catch (error:any) {
+      await business.insertData(emptyfile as any);
+    } catch (error: any) {
       expect(error.message).toBe("Error reading the file");
       expect(error.statusCode).toBe(400);
     }
@@ -42,11 +52,11 @@ describe("Business Tests - insertData method", () => {
 
   test("Error: incorrect format ", async () => {
     const wrongFile = {
-      path: './tests/mocks/wrong.txt'
-    } ;
+      path: "./tests/mocks/wrong.txt",
+    };
     try {
-      await business.insertData(wrongFile as any)
-    } catch (error:any) {
+      await business.insertData(wrongFile as any);
+    } catch (error: any) {
       expect(error.message).toBe("Incorrect file format");
       expect(error.statusCode).toBe(406);
     }
@@ -121,5 +131,42 @@ describe("Business Tests - findAllTransactions method", () => {
   test("Sucess case: database calls", async () => {
     await business.findAllTransactions();
     expect(databaseMock.findAllTransactions).toBeCalledTimes(1);
+  });
+
+  describe("Business Tests - login method", () => {
+    const input = {
+      email: "email@email.com",
+      password: "123456",
+    };
+
+    test("Sucess case", async () => {
+      const result = await business.login(input);
+      expect(result).toBe("token");
+    });
+
+    test("Sucess case:: database call", async () => {
+     await business.login(input);
+      expect(databaseMock.findUserByEmail).toBeCalledTimes(1)
+    });
+
+    test("Sucess case:: authenticator call", async () => {
+      await business.login(input);
+       expect(authenticator.generateToken).toBeCalledTimes(1)
+     });
+    
+     test("Sucess case:: hashManager call", async () => {
+      await business.login(input);
+       expect(hashManager.verifyHash).toBeCalledTimes(1)
+     });
+
+    test("Error: wrong password", async () => {
+      input.password = "123";
+      try {
+        await business.login(input);
+      } catch (error: any) {
+        expect(error.message).toBe("Invalid password, try again");
+        expect(error.statusCode).toBe(406);
+      }
+    });
   });
 });

@@ -1,5 +1,6 @@
 
 import * as jwt from "jsonwebtoken";
+import { IAuthenticator } from "../business/adapters";
 
 
 export interface AuthenticationData {
@@ -7,7 +8,7 @@ export interface AuthenticationData {
     role: string;
   } 
 
-export class Authenticator {
+export class Authenticator implements IAuthenticator {
 
     private JWT_KEY =  "Huble!TokenKey"
 
