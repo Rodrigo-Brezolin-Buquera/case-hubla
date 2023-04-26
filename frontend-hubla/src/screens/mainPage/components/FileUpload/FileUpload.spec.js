@@ -1,6 +1,17 @@
-import { render, screen,cleanup } from "@testing-library/react";
+import { render, screen,cleanup, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FileUpload from "../..";
+import { useRouter } from "next/router";
+
+jest.mock('next/router', () => ({
+    useRouter: jest.fn()
+}))
+
+const pushMock = jest.fn()
+
+useRouter.mockReturnValue({
+    push: pushMock,
+})
 
 describe.skip("FileUpload component Tests", () => {
     afterEach(() => {
