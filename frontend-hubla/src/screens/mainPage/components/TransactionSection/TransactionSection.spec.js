@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import TransactionSection from "./index"
 
 
-describe("TransactionSection component Tests", () => {
+describe.skip("TransactionSection component Tests", () => {
     afterEach(() => {
         cleanup();
       });

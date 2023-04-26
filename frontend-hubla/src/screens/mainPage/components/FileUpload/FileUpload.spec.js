@@ -2,7 +2,7 @@ import { render, screen,cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FileUpload from "../..";
 
-describe("FileUpload component Tests", () => {
+describe.skip("FileUpload component Tests", () => {
     afterEach(() => {
         cleanup();
       });

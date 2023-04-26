@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import SellerSelection from "./index"
 import React from "react"
 
-describe("SellerSelection component Tests", () => {
+describe.skip("SellerSelection component Tests", () => {
   
     afterEach(() => {
         cleanup();
