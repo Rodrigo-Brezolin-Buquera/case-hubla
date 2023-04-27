@@ -1,10 +1,10 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router'
 
 export const useProtectedPage = () => {
     const router = useRouter()
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const token = localStorage.getItem('token')
         if(!token) {
             router.push('/')
@@ -15,7 +15,7 @@ export const useProtectedPage = () => {
 export const useUnprotectedPage = () => {
     const router = useRouter()
     
-    useLayoutEffect(() => {
+    useEffect(() => {
         const token = localStorage.getItem('token')
         if(token) {
             router.push('/home')

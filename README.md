@@ -13,6 +13,10 @@
 
 ## Explanatory Video
 
+## Login
+   email: email@email.com.br
+   password: 123456
+
 ## API Documentation 
 
 <a href="https://documenter.getpostman.com/view/18571104/2s93Y6tKRP
@@ -45,43 +49,44 @@
 ### With npm / node 
 
 <h4>1º | Clone the repository </h4>
-`
+<pre>
     git clone https://github.com/Rodrigo-Brezolin-Buquera/Case-Green-Acesso.git
-`
+</pre>
 <h4>2º | Change to the backend directory via terminal: </h4>
-`
+<pre>
    cd backend-hubla/
-`
+<pre>
 <h4>3º | Install the dependencies with: </h4>
-`
+<pre>
    npm install
-`
+<pre>
 <h4>4º | Run the build with: </h4>
-`
+<pre>
    npm run build
-`
+<pre>
 <h4>5º | Start the application with: </h4>
-`
+<pre>
    npm run start
-`
+<pre>
 <h4>6º | Change to the frontend directory via terminal: </h4>
-`
+<pre>
    cd ../frontend-hubla
-`
+<pre>
 <h4>7º | Install the dependencies with: </h4>
-`
+<pre>
    npm install
-`
+<pre>
 <h4>8º | Run the build with: </h4>
-`
+<pre>
    npm run build   
-`
+<pre>
 <h4>9º | Start the application with: </h4>
-`
+<pre>
    npm run start
-` 
+<pre> 
  <h4>10º | Access the site via browser  </h4>
 <a href="http://localhost:3000/">http://localhost:3000/</a>
+
 
 ### With docker
 
