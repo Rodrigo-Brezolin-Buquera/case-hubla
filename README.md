@@ -13,6 +13,9 @@
 
 ## Explanatory Video
 
+<a href="https://www.loom.com/share/10ccea52cdc24dc6be5ce723c046444e">https://www.loom.com/share/10ccea52cdc24dc6be5ce723c046444e2s93Y6tKRP
+</a>
+
 ## Login
    email: email@email.com.br
    password: 123456
