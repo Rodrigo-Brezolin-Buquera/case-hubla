@@ -4,7 +4,6 @@ import Controller from "./controller";
 import multer from 'multer';
 import Business from "./business";
 import Database from "./data";
-import { deleteTempFile } from "./business/utils";
 import { HashManager } from "./services/HashManager";
 import { Authenticator } from "./services/Authenticator";
 
@@ -20,7 +19,7 @@ app.listen(3003, () => {
 });
 
 const database = new Database()
-const business = new Business(database, deleteTempFile, new HashManager(), new Authenticator() )
+const business = new Business(database, new HashManager(), new Authenticator() )
 const controller = new Controller(business)
 
 app.get("/sellers",  (req, res) =>  controller.findAllSellers(req, res));
