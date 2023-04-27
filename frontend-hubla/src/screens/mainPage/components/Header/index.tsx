@@ -21,7 +21,7 @@ const Header = () => {
       alignItems={"center"}
       position={"relative"}
     >
-      <Text fontSize={["sm","xl"]} maxW={["300px", "auto" ]  }>
+      <Text fontSize={["sm","xl"]} maxW={["300px","500px", "800px" ]  }>
         FullStack Challenge - Hubla! - Develop by Rodrigo Brezolin Buquera
       </Text>
       <Button
