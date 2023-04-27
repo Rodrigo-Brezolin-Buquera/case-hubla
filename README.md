@@ -55,7 +55,7 @@
 <h4>2º | Change to the backend directory via terminal: </h4>
 <pre>
    cd backend-hubla/
-<pre>
+</pre>
 <h4>3º | Install the dependencies with: </h4>
 <pre>
    npm install
@@ -63,11 +63,11 @@
 <h4>4º | Run the build with: </h4>
 <pre>
    npm run build
-<pre>
+</pre>
 <h4>5º | Start the application with: </h4>
 <pre>
    npm run start
-<pre>
+</pre>
 <h4>6º | Change to the frontend directory via terminal: </h4>
 <pre>
    cd ../frontend-hubla
@@ -75,15 +75,15 @@
 <h4>7º | Install the dependencies with: </h4>
 <pre>
    npm install
-<pre>
+</pre>
 <h4>8º | Run the build with: </h4>
 <pre>
    npm run build   
-<pre>
+</pre>
 <h4>9º | Start the application with: </h4>
 <pre>
    npm run start
-<pre> 
+</pre> 
  <h4>10º | Access the site via browser  </h4>
 <a href="http://localhost:3000/">http://localhost:3000/</a>
 
