@@ -71,7 +71,7 @@
 <h4>6º | Change to the frontend directory via terminal: </h4>
 <pre>
    cd ../frontend-hubla
-<pre>
+</pre>
 <h4>7º | Install the dependencies with: </h4>
 <pre>
    npm install
