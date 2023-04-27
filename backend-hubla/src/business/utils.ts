@@ -80,6 +80,3 @@ export const normalizeData = async (file: Express.Multer.File): Promise<any[]> =
       return chunks
 }
 
-export const deleteTempFile = (filePath: string) => {
-  fs.unlink(filePath, (err) => {});
-} 

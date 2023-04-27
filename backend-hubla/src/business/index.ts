@@ -12,7 +12,6 @@ import { IAuthenticator, IHashManager } from "./adapters";
 class Business {
   constructor(
     private database: Repository,
-    private deleteTempFile: (filePath: string) => void,
     private hashManager: IHashManager,
     private authenticator: IAuthenticator
   ) {}
@@ -45,7 +44,6 @@ class Business {
 
         await this.database.updateBalance(seller.id, seller.balance);
 
-        this.deleteTempFile(file.path);
       }
     } catch (error: any) {
       throw new CustomError(

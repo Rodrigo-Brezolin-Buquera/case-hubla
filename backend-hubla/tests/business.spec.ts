@@ -3,7 +3,6 @@ import { DatabaseMock } from "./mocks/databaseMock";
 import { SellerType } from "../src/types";
 import {
   AuthenticatorMock,
-  deleteTempFileMock,
   HashManagerMock,
 } from "./mocks/mocks";
 
@@ -13,7 +12,6 @@ const authenticator = new AuthenticatorMock();
 const databaseMock = new DatabaseMock();
 const business = new Business(
   databaseMock,
-  deleteTempFileMock,
   hashManager,
   authenticator
 );
