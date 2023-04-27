@@ -59,7 +59,7 @@
 <h4>3º | Install the dependencies with: </h4>
 <pre>
    npm install
-<pre>
+</pre>
 <h4>4º | Run the build with: </h4>
 <pre>
    npm run build
@@ -91,32 +91,32 @@
 ### With docker
 
 <h4>1º | Clone the repository </h4>
-`
+<pre>
     git clone https://github.com/Rodrigo-Brezolin-Buquera/Case-Green-Acesso.git
-`
+</pre>
 <h4>2º | Change to the backend directory via terminal: </h4>
-`
+<pre>
    cd backend-hubla/
-`
+</pre>
 <h4>3º | Run the build with: </h4>
-`
+<pre>
     docker build  -t backend .
-`
+</pre>
 <h4>4º | Run the the container with: </h4>
-`
+<pre>
    docker run  --name backend  -p 3003:3003 backend
-`
+</pre>
 <h4>5º | Change to the frontend directory via terminal: </h4>
-`
+<pre>
    cd ../frontend-hubla
-`
+</pre>
 <h4>6º | Run the build with: </h4>
-`
+<pre>
     docker build  -t frontend .
-`
+</pre>
 <h4>7º | Run the the container with: </h4>
-`
+<pre>
     docker run  --name frontend  -p 3000:3000 frontend
-`
+</pre>
 <h4>8º | Access the site via browser  </h4>
     <a href="http://localhost:3000/">http://localhost:3000/</a>
